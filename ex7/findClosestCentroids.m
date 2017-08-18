@@ -20,15 +20,16 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
-for iter = 1:size(X, 1)
-	dist = inf;
-	for iter2 = 1:K
-		if sum((X(iter, :) - centroids(iter2, :)) .^ 2) < dist
-			dist = sum((X(iter, :) - centroids(iter2, :)) .^ 2);
-			idx(iter, 1) = iter2;
-		end
-	end
+for i = 1 : size(X,1)
+    idx_temp = 1
+    for j = 2 : K
+        if sum((centroids(j,:) - X(i,:)).^2) < sum((centroids(idx_temp,:) - X(i,:)).^2)
+            idx_temp = j
+        end
+    end
+    idx(i) = idx_temp
 end
+
 
 
 
